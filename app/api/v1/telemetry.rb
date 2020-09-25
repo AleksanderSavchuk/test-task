@@ -17,12 +17,13 @@ module V1
         end
       end
       post do
+        tablet = Tablet.find(params[:tablet_id])
         ActiveRecord::Base.transaction do
           params[:sensor_checks].each do |sensor_check|
             SensorCheck.create!(time: sensor_check[:time],
                                 sensor_type_id: sensor_check[:sensor_type_id],
                                 value: sensor_check[:value],
-                                tablet_id: params[:tablet_id])
+                                tablet: tablet)
           end
         end
       end
