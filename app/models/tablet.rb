@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class Tablet < ApplicationRecord
-  has_many :sensor_checks
+  has_many :sensor_checks, dependent: :destroy
 end

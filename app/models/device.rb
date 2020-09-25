@@ -2,9 +2,9 @@
 
 class Device < ApplicationRecord
   belongs_to :user
-  has_one :mobile_phone
-  has_one :tablet
-  has_one :browser
+  has_one :mobile_phone, dependent: :destroy
+  has_one :tablet, dependent: :destroy
+  has_one :browser, dependent: :destroy
 
   enum device_type: {
     tablet: 0,
