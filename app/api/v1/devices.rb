@@ -18,12 +18,11 @@ module V1
       desc 'Create new device'
       params do
         requires :user_id, type: Integer
-        requires :entity_id, type: Integer
         requires :entity_type, type: String
       end
       post do
         user = User.find_by_id(params[:user_id])
-        entity = params[:entity_type].capitalize.constantize.find_by_id(params[:entity_id])
+        entity = params[:entity_type].capitalize.constantize.create!
         Device.create!(user: user, entity: entity)
       end
     end

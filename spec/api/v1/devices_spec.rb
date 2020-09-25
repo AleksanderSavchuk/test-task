@@ -19,12 +19,14 @@ describe V1::Devices do
   end
 
   describe 'POST /api/v1/devices' do
-    let(:browser) { Browser.create! }
-    let(:params) { { user_id: user.id, entity_id: browser.id, entity_type: browser.class.name.downcase } }
+    let(:params) { { user_id: user.id, entity_type: 'browser' } }
 
     it 'return the proper attributes' do
       expect { post "/api/v1/devices?user_id=#{user.id}", params: params }
         .to change(Device, :count).by(1)
+      expect { post "/api/v1/devices?user_id=#{user.id}", params: params }
+        .to change(Browser, :count).by(1)
+      byebug
     end
   end
 end
