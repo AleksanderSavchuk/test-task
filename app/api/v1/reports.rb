@@ -9,7 +9,7 @@ module V1
     resource :reports do
       desc 'Get tablets report'
       params do
-        requires :tablet_id
+        requires :tablet_id, type: Integer
       end
       get do
         sql = [
