@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class MobilePhone < ApplicationRecord
-  belongs_to :device
+  has_one :device, as: :entity
 end

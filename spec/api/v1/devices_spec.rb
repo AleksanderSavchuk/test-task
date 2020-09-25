@@ -5,7 +5,8 @@ require 'rails_helper'
 describe V1::Devices do
   # Ususally I use FactoryBot
   let(:user) { User.create(name: 'Test') }
-  let!(:device) { Device.create(user: user) }
+  let(:mobile_phone) { MobilePhone.create }
+  let!(:device) { Device.create(user: user, entity: mobile_phone) }
 
   describe 'GET /api/v1/devices' do
     before do
@@ -18,7 +19,8 @@ describe V1::Devices do
   end
 
   describe 'POST /api/v1/devices' do
-    let(:params) { { user_id: user.id, device_type: 'mobile_phone' } }
+    let(:browser) { Browser.create! }
+    let(:params) { { user_id: user.id, entity_id: browser.id, entity_type: browser.class.name.downcase } }
 
     it 'return the proper attributes' do
       expect { post "/api/v1/devices?user_id=#{user.id}", params: params }
